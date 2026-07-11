@@ -72,6 +72,7 @@ def ingest_month(year: int, month: int, local_path: str) -> int:
 
 if __name__ == "__main__":
     import argparse
+    import os
     import tempfile
 
     logging.basicConfig(level=logging.INFO)
@@ -80,6 +81,11 @@ if __name__ == "__main__":
     parser.add_argument("--month", type=int, required=True)
     args = parser.parse_args()
 
-    with tempfile.NamedTemporaryFile(suffix=".parquet") as tmp:
-        download_month(args.year, args.month, tmp.name)
-        ingest_month(args.year, args.month, tmp.name)
+    tmp = tempfile.NamedTemporaryFile(suffix=".parquet", delete=False)
+    tmp_path = tmp.name
+    tmp.close()
+    try:
+        download_month(args.year, args.month, tmp_path)
+        ingest_month(args.year, args.month, tmp_path)
+    finally:
+        os.unlink(tmp_path)

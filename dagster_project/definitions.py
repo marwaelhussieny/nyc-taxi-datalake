@@ -7,7 +7,6 @@ Three assets, one per layer, each depending on the previous:
 Run on a monthly schedule, matching the cadence NYC TLC actually publishes
 new data (with their own ~2 month reporting delay).
 """
-from __future__ import annotations
 
 import sys
 from pathlib import Path
