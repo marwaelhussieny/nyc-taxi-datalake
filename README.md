@@ -31,7 +31,7 @@ production: a lakehouse, not just a warehouse.
 *(Diagram generated separately - see the prompt below if you want to
 regenerate or adapt it.)*
 
-![Pipeline architecture](docs/architecture.png)
+![Pipeline architecture](docs/screenshots/architecture.png)
 
 <details>
 <summary>Prompt used to generate the architecture diagram</summary>
