@@ -1,0 +1,6 @@
+# Copy to terraform.tfvars and fill in a globally-unique bucket name.
+# S3 bucket names are global across ALL AWS accounts, not just yours -
+# "nyc-taxi-datalake" is almost certainly taken. Add your name/initials.
+
+aws_region  = "us-east-1"
+bucket_name = "nyc-taxi-datalake-marwa-portfolio" # change this - must be globally unique

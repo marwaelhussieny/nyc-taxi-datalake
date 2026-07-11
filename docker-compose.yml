@@ -1,0 +1,31 @@
+services:
+  trino:
+    image: trinodb/trino:latest
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./trino/catalog:/etc/trino/catalog
+    environment:
+      AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
+      AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
+      AWS_REGION: ${AWS_REGION:-us-east-1}
+
+  dagster:
+    image: python:3.11-slim
+    working_dir: /opt/dagster
+    volumes:
+      - ./dagster_project:/opt/dagster/dagster_project
+      - ./src:/opt/dagster/src
+      - ./requirements.txt:/opt/dagster/requirements.txt
+    ports:
+      - "3000:3000"
+    environment:
+      AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
+      AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
+      AWS_REGION: ${AWS_REGION:-us-east-1}
+      LAKE_BUCKET_NAME: ${LAKE_BUCKET_NAME}
+      GLUE_DATABASE_NAME: ${GLUE_DATABASE_NAME:-nyc_taxi_lakehouse}
+      PYTHONPATH: /opt/dagster/src
+    command: >
+      bash -c "pip install --no-cache-dir -r requirements.txt dagster dagster-webserver &&
+               dagster dev -f dagster_project/definitions.py -h 0.0.0.0 -p 3000"
