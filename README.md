@@ -33,38 +33,6 @@ regenerate or adapt it.)*
 
 ![Pipeline architecture](docs/screenshots/architecture.png)
 
-<details>
-<summary>Prompt used to generate the architecture diagram</summary>
-
-```
-Create a clean, professional data engineering architecture diagram in a flat
-modern tech-illustration style (like official AWS architecture diagrams).
-Horizontal left-to-right flow on a white or light gray background.
-
-Components, left to right:
-1. A cloud/download icon labeled "NYC TLC Yellow Taxi Parquet" (monthly public data)
-2. An arrow into a dashed rounded rectangle labeled "Dagster - monthly schedule",
-   containing three sequential boxes connected by arrows:
-   a. "Bronze" (subtitle: raw ingest, Iceberg table)
-   b. "Silver" (subtitle: cleaned, quality-gated)
-   c. "Gold" (subtitle: daily zone-level aggregates)
-3. All three Bronze/Silver/Gold boxes should visually sit on top of or
-   overlapping a wide flat shape labeled "Amazon S3" to show they are all
-   physically stored there as Iceberg tables
-4. A small icon labeled "AWS Glue Catalog" connected to all three
-   Bronze/Silver/Gold boxes with thin dotted lines (showing it catalogs all
-   three tables, not just one)
-5. Below or beside the S3/Glue layer, a separate box labeled "Trino"
-   (subtitle: local Docker, SQL queries) with an arrow pointing into it from
-   the Gold box, representing query access
-
-Use a professional color palette: gray/tan for the raw source and Bronze box,
-teal for Silver, gold/amber for the Gold box (matching its name), and a
-distinct purple or dark blue for Trino to show it's a separate query layer.
-Include small AWS, Iceberg, and Dagster logos/icons near their respective
-components. Clean sans-serif typography, minimal shadows, suitable as a
-GitHub README hero image.
-```
 
 </details>
 
